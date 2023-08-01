@@ -1,0 +1,42 @@
+<script>
+  import Icon from "svelte-icons-pack/Icon.svelte";
+  import CgCloseO from "svelte-icons-pack/cg/CgCloseO"; 
+
+  let shown = false;
+
+  export const show = () => shown = true;
+  export const hide = () => shown = false;
+
+  let hoveringOnModal = false;
+
+  export const checkWhereClicked = () => (hoveringOnModal ? "" : hide());
+
+</script>
+
+{#if shown}
+  <div class="bg-black bg-opacity-60 fixed w-full h-full t-0 l-0 right-0 bottom-0 text-black flex justify-center"
+    on:click={() => checkWhereClicked()}
+    on:keydown={(e) => {
+      if (e.key === 'Escape') {
+        hide();
+      }
+    }}
+  >
+    <div class="bg-white max-w-[80%] p-[1rem] m-[20%] overflow-hidden"
+      on:mouseenter={() => hoveringOnModal = true}
+      on:mouseleave={() => hoveringOnModal = false}
+    >
+      <span class="float-right hover:cursor-pointer hover:scale-105 transition-all" 
+        on:click={() => hide()}
+        on:keydown={(e) => {
+          if (e.key == 'Enter') {
+            hide();
+          }
+        }}
+      >
+        <Icon src={CgCloseO}/>
+      </span>
+      <slot />
+    </div>
+  </div>
+{/if}
