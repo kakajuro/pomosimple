@@ -5,19 +5,22 @@
   import RiMediaSkipForwardLine from "svelte-icons-pack/ri/RiMediaSkipForwardLine"
 
   import { timerActive, 
-            secondsStore, 
             actualSecondsStore, 
             displayMinutesStore, 
             displaySecondsStore, 
-            secondsStoreBreak, 
             halfCycle,
             pomodoroMode,
-            pomodoroCount } from "../stores/stores"
+            pomodoroCount } from "../stores/mainStores"
+
+  import {
+    SETTINGSpomodoroTime,
+    SETTINGSbreakTime
+  } from "../stores/settingsStores"
 
   let skipButtonActive = false;
   let whichTimer;
   
-  $: whichTimer = $pomodoroMode ? $secondsStore : $secondsStoreBreak;
+  $: whichTimer = $pomodoroMode ? $SETTINGSpomodoroTime : $SETTINGSbreakTime;
 
   $: displayMinutes = Math.floor(whichTimer / 60);
   $: actualSeconds = whichTimer - (displayMinutes * 60)
@@ -31,15 +34,14 @@
 
   $: if (whichTimer == 0) {
 
-
     if ($pomodoroMode) {
       $halfCycle = true;
-      whichTimer = $secondsStoreBreak
+      whichTimer = $SETTINGSbreakTime;
     } else if (!$pomodoroMode && $halfCycle) {
       $pomodoroCount += 1
-      whichTimer = $secondsStore;
+      whichTimer = $SETTINGSpomodoroTime;
     } else {
-      whichTimer = $secondsStore
+      whichTimer = $SETTINGSpomodoroTime;
     } 
 
     changePomodoroMode(!$pomodoroMode);

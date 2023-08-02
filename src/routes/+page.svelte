@@ -8,7 +8,7 @@
 
   import Modal from "../components/Modal.svelte";
   import Timer from "../components/Timer.svelte";
-  import { displaySecondsStore, displayMinutesStore, pomodoroMode, pomodoroCount } from "../stores/stores"
+  import { displaySecondsStore, displayMinutesStore, pomodoroMode, pomodoroCount } from "../stores/mainStores"
 
   let hoveringOnSettings = false;
   let hoveringOnRepo = false;

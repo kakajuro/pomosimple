@@ -2,8 +2,6 @@ import { writable } from "svelte/store"
 
 // Timer stores
 export const timerActive = writable(false);
-export const secondsStore = writable(3);
-export const secondsStoreBreak = writable(5);
 export const displaySecondsStore = writable();
 export const displayMinutesStore = writable();
 export const actualSecondsStore = writable();
