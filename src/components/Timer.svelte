@@ -87,10 +87,10 @@
       on:click={() => changePomodoroMode(false)}>Break</button>
   </div>
 
-  <h1 class="font-bold text-8xl sm:text-9xl pb-10 cursor-default" transition:fade>{displayMinutes}:{displaySeconds}</h1>
+  <h1 class="font-bold text-8xl sm:text-9xl pb-10 cursor-default hover:select-none" transition:fade>{displayMinutes}:{displaySeconds}</h1>
   
   <div class={skipButtonActive ? `flex flex-col sm:flex-row items-center justify-center sm:pl-[4.3rem]` : `flex flex-row items-center justify-center`}>
-    <button class="text-blue-700 bg-white h-12 w-48 rounded-lg text-xl font-bold uppercase shadow-xl" 
+    <button class="text-blue-700 bg-white h-12 w-48 rounded-lg text-xl font-bold uppercase shadow-xl hover:shadow-2xl hover:text-blue-500" 
     on:click={startTimer}
     transition:fade
     >{$timerActive ? "Pause" : "Start"}</button>
