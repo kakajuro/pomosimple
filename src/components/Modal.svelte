@@ -26,7 +26,7 @@
       on:mouseenter={() => hoveringOnModal = true}
       on:mouseleave={() => hoveringOnModal = false}
     >
-      <span class="float-right hover:cursor-pointer hover:scale-105 transition-all" 
+      <button class="float-right hover:cursor-pointer hover:scale-105 transition-all" 
         on:click={() => hide()}
         on:keydown={(e) => {
           if (e.key == 'Enter') {
@@ -35,7 +35,7 @@
         }}
       >
         <Icon src={CgCloseO}/>
-      </span>
+      </button>
       <slot />
     </div>
   </div>
