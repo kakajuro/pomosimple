@@ -5,10 +5,18 @@
   import Icon from "svelte-icons-pack/Icon.svelte"
   import IoSettingsOutline from "svelte-icons-pack/io/IoSettingsOutline"
   import AiFillGithub from "svelte-icons-pack/ai/AiFillGithub";
+  import Toggle from "svelte-toggle/src/Toggle.svelte";
 
-  import Modal from "../components/Modal.svelte";
-  import Timer from "../components/Timer.svelte";
-  import { displaySecondsStore, displayMinutesStore, pomodoroMode, pomodoroCount } from "../stores/mainStores"
+  import Modal from "$lib/Modal.svelte";
+  import Timer from "$lib/Timer.svelte";
+  import { 
+    displaySecondsStore, 
+    displayMinutesStore, 
+    pomodoroMode, 
+    pomodoroCount } from "../stores/mainStores";
+
+  let pomodoroMins, breakMins;
+  let autoStartPomodorosToggled = true;
 
   let hoveringOnSettings = false;
   let hoveringOnRepo = false;
@@ -65,8 +73,27 @@
       <h2 class="pt-10 font-bold text-xl">Stats</h2>
       
       <Modal bind:this={modal}>
-        <h1>Modal title</h1>
-        <p>This is a line of text that is in the modal.</p>
+        <h1 class="font-2xl pb-2">Settings</h1>
+        <hr class="border-y-[1] bg-slate-300" />
+        <div class="pt-6">
+          <h1 class="pb-2 font-bold underline">Timer (minutes)</h1>
+          <div class="flex flex-row justify-between pb-3">
+            <p class="font-semibold">Pomodoro length</p>
+            <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={pomodoroMins} />
+          </div>
+          <div class="flex flex-row justify-between pb-2">
+            <p class="font-semibold">Break length</p>
+            <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={breakMins} />
+          </div> 
+        </div>
+        
+        <div class="flex flex-row justify-between pb-2">
+          <p class="font-semibold">Autostart pomodoros?</p>
+          <svelte.fragemen class="mr-12">
+            <Toggle bind:autoStartPomodorosToggled on:toggle={(e) => (autoStartPomodorosToggled = e.detail)} hideLabel label="Pomodoro start time" small={false} />
+          </svelte.fragemen>
+        </div>
+
         <p>Another line of text in the modal.</p>
       </Modal>
 
