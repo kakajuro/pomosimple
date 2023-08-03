@@ -89,9 +89,9 @@
         
         <div class="flex flex-row justify-between pb-2">
           <p class="font-semibold">Autostart pomodoros?</p>
-          <svelte.fragemen class="mr-12">
+          <svelte.fragement class="mr-12">
             <Toggle bind:autoStartPomodorosToggled on:toggle={(e) => (autoStartPomodorosToggled = e.detail)} hideLabel label="Pomodoro start time" small={false} />
-          </svelte.fragemen>
+          </svelte.fragement>
         </div>
 
         <p>Another line of text in the modal.</p>
