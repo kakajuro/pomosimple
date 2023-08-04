@@ -9,6 +9,8 @@
 
   import Modal from "$lib/Modal.svelte";
   import Timer from "$lib/Timer.svelte";
+  import ToggleWrapper from "$lib/ToggleWrapper.svelte";
+
   import { 
     displaySecondsStore, 
     displayMinutesStore, 
@@ -89,12 +91,11 @@
         
         <div class="flex flex-row justify-between pb-2">
           <p class="font-semibold">Autostart pomodoros?</p>
-          <svelte.fragement class="mr-12">
+          <ToggleWrapper>
             <Toggle bind:autoStartPomodorosToggled on:toggle={(e) => (autoStartPomodorosToggled = e.detail)} hideLabel label="Pomodoro start time" small={false} />
-          </svelte.fragement>
+          </ToggleWrapper>
         </div>
-
-        <p>Another line of text in the modal.</p>
+        
       </Modal>
 
     </div>
