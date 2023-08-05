@@ -12,3 +12,6 @@ export const halfCycle = writable(false);
 
 // Stats stores
 export const pomodoroCount = writable(0);
+
+// Modal store
+export const modalOpen = writable(false);

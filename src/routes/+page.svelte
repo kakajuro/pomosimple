@@ -5,27 +5,21 @@
   import Icon from "svelte-icons-pack/Icon.svelte"
   import IoSettingsOutline from "svelte-icons-pack/io/IoSettingsOutline"
   import AiFillGithub from "svelte-icons-pack/ai/AiFillGithub";
-  import Toggle from "svelte-toggle/src/Toggle.svelte";
 
-  import Modal from "$lib/Modal.svelte";
   import Timer from "$lib/Timer.svelte";
-  import ToggleWrapper from "$lib/ToggleWrapper.svelte";
+  import Modal from "../lib/Modal.svelte";
 
   import { 
     displaySecondsStore, 
     displayMinutesStore, 
     pomodoroMode, 
-    pomodoroCount } from "../stores/mainStores";
-
-  let pomodoroMins, breakMins;
-  let autoStartPomodorosToggled = true;
+    pomodoroCount,
+    modalOpen } from "../stores/mainStores";
 
   let hoveringOnSettings = false;
   let hoveringOnRepo = false;
 
   let repoLink = "https://github.com/swishyy/pomosimple";
-
-  let modal;
 
   let ready = false;
   onMount(() => ready = true);
@@ -52,7 +46,7 @@
         </div>
         <div>
           <button class="text-3xl pt-2 ml-auto hover:cursor-pointer hover:scale-105 transition-all" 
-            on:click={() => modal.show()}
+            on:click={() => $modalOpen = !$modalOpen}
             on:mouseenter={() => hoveringOnSettings = true}
             on:mouseleave={() => hoveringOnSettings = false}
           >
@@ -74,31 +68,11 @@
 
       <h2 class="pt-10 font-bold text-xl">Stats</h2>
       
-      <Modal bind:this={modal}>
-        <h1 class="font-2xl pb-2">Settings</h1>
-        <hr class="border-y-[1] bg-slate-300" />
-        <div class="pt-6">
-          <h1 class="pb-2 font-bold underline">Timer (minutes)</h1>
-          <div class="flex flex-row justify-between pb-3">
-            <p class="font-semibold">Pomodoro length</p>
-            <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={pomodoroMins} />
-          </div>
-          <div class="flex flex-row justify-between pb-2">
-            <p class="font-semibold">Break length</p>
-            <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={breakMins} />
-          </div> 
-        </div>
-        
-        <div class="flex flex-row justify-between pb-2">
-          <p class="font-semibold">Autostart pomodoros?</p>
-          <ToggleWrapper>
-            <Toggle bind:autoStartPomodorosToggled on:toggle={(e) => (autoStartPomodorosToggled = e.detail)} hideLabel label="Pomodoro start time" small={false} />
-          </ToggleWrapper>
-        </div>
-        
-      </Modal>
+      <!-- Fill stats here -->
 
     </div>
+
+    <Modal />
 
   </div>
 {/if}

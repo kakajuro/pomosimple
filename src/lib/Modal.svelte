@@ -1,42 +1,32 @@
 <script>
-  import Icon from "svelte-icons-pack/Icon.svelte";
-  import CgCloseO from "svelte-icons-pack/cg/CgCloseO"; 
+  import ModalTemplate from "./ModalTemplate.svelte";
+  import ToggleWrapper from "./ToggleWrapper.svelte";
+  import Toggle from "svelte-toggle/src/Toggle.svelte";
 
-  let shown = false;
-
-  export const show = () => shown = true;
-  export const hide = () => shown = false;
-
-  let hoveringOnModal = false;
-
-  export const checkWhereClicked = () => (hoveringOnModal ? "" : hide());
-
+  let pomodoroMins, breakMins;
+  let autoStartPomodorosToggled = true;
+  
 </script>
 
-{#if shown}
-  <div class="bg-black bg-opacity-60 fixed w-full h-full t-0 l-0 right-0 bottom-0 text-black flex justify-center"
-    on:click={() => checkWhereClicked()}
-    on:keydown={(e) => {
-      if (e.key === 'Escape') {
-        hide();
-      }
-    }}
-  >
-    <div class="bg-white w-[20%] p-[1rem] mt-[5%] rounded-md"
-      on:mouseenter={() => hoveringOnModal = true}
-      on:mouseleave={() => hoveringOnModal = false}
-    >
-      <button class="float-right hover:cursor-pointer hover:scale-105 transition-all" 
-        on:click={() => hide()}
-        on:keydown={(e) => {
-          if (e.key == 'Enter') {
-            hide();
-          }
-        }}
-      >
-        <Icon src={CgCloseO}/>
-      </button>
-      <slot />
+<ModalTemplate>
+  <h1 class="font-2xl pb-2">Settings</h1>
+  <hr class="border-y-[1] bg-slate-300" />
+  <div class="pt-6">
+    <h1 class="pb-2 font-bold underline">Timer (minutes)</h1>
+    <div class="flex flex-row justify-between pb-3">
+      <p class="font-semibold">Pomodoro length</p>
+      <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={pomodoroMins} />
     </div>
+    <div class="flex flex-row justify-between pb-2">
+      <p class="font-semibold">Break length</p>
+      <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={breakMins} />
+    </div> 
   </div>
-{/if}
+    
+  <div class="flex flex-row justify-between pb-2">
+    <p class="font-semibold">Autostart pomodoros?</p>
+    <ToggleWrapper>
+      <Toggle bind:autoStartPomodorosToggled on:toggle={(e) => (autoStartPomodorosToggled = e.detail)} hideLabel label="Pomodoro start time" small={false} />
+    </ToggleWrapper>
+  </div>
+</ModalTemplate>
