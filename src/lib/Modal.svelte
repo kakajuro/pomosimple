@@ -7,21 +7,17 @@
     SETTINGSpomodoroTime,
     SETTINGSbreakTime,
     SETTINGSautoStartPomodoro,
-    SETTINGSautoStartBreak
+    SETTINGSautoStartBreak,
   } from "../stores/settingsStores"
-
-  let pomodoroMins, breakMins;
-  let autoStartPomodoros = false;
-  let autoStartBreaks = false;
 
   function handlePomodoroSwitch(e) {
     const { checked } = e.detail;
-    autoStartPomodoros = checked;
+    $SETTINGSautoStartPomodoro = checked;
   }
 
   function handleBreakSwitch(e) {
     const { checked } = e.detail;
-    autoStartBreaks = checked;
+    $SETTINGSautoStartBreak = checked;
   }
    
 </script>
@@ -33,11 +29,11 @@
     <h1 class="pb-2 font-bold underline">Timer (minutes)</h1>
     <div class="flex flex-row justify-between pb-3">
       <p class="font-semibold">Pomodoro length</p>
-      <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={pomodoroMins} />
+      <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={$SETTINGSpomodoroTime} />
     </div>
     <div class="flex flex-row justify-between pb-4">
       <p class="font-semibold">Break length</p>
-      <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={breakMins} />
+      <input class="bg-slate-200 border rounded-md w-16 mr-10 p-" type="number" min={1} bind:value={$SETTINGSbreakTime} />
     </div> 
   </div>
   <div class="flex flex-row justify-between pb-4">
@@ -45,7 +41,7 @@
     <SwitchWrapper>
       <Switch 
         on:change={handlePomodoroSwitch} 
-        checked={autoStartPomodoros}
+        checked={$SETTINGSautoStartPomodoro}
         handleDiameter={20}
         onColor={"#243ed1"}
         height={24}
@@ -58,7 +54,7 @@
     <SwitchWrapper>
       <Switch 
         on:change={handleBreakSwitch} 
-        checked={autoStartBreaks}
+        checked={$SETTINGSautoStartBreak}
         handleDiameter={20}
         onColor={"#243ed1"}
         height={24}
