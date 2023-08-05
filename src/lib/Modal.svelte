@@ -1,15 +1,33 @@
 <script>
   import ModalTemplate from "./ModalTemplate.svelte";
-  import ToggleWrapper from "./ToggleWrapper.svelte";
-  import Toggle from "svelte-toggle/src/Toggle.svelte";
+  import SwitchWrapper from "./SwitchWrapper.svelte";
+  import Switch from "svelte-switch";
+
+  import {
+    SETTINGSpomodoroTime,
+    SETTINGSbreakTime,
+    SETTINGSautoStartPomodoro,
+    SETTINGSautoStartBreak
+  } from "../stores/settingsStores"
 
   let pomodoroMins, breakMins;
-  let autoStartPomodorosToggled = true;
-  
+  let autoStartPomodoros = false;
+  let autoStartBreaks = false;
+
+  function handlePomodoroSwitch(e) {
+    const { checked } = e.detail;
+    autoStartPomodoros = checked;
+  }
+
+  function handleBreakSwitch(e) {
+    const { checked } = e.detail;
+    autoStartBreaks = checked;
+  }
+   
 </script>
 
 <ModalTemplate>
-  <h1 class="font-2xl pb-2">Settings</h1>
+  <h1 class="text-xl pb-2">Settings</h1>
   <hr class="border-y-[1] bg-slate-300" />
   <div class="pt-6">
     <h1 class="pb-2 font-bold underline">Timer (minutes)</h1>
@@ -17,16 +35,35 @@
       <p class="font-semibold">Pomodoro length</p>
       <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={pomodoroMins} />
     </div>
-    <div class="flex flex-row justify-between pb-2">
+    <div class="flex flex-row justify-between pb-4">
       <p class="font-semibold">Break length</p>
       <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={breakMins} />
     </div> 
   </div>
-    
-  <div class="flex flex-row justify-between pb-2">
-    <p class="font-semibold">Autostart pomodoros?</p>
-    <ToggleWrapper>
-      <Toggle bind:autoStartPomodorosToggled on:toggle={(e) => (autoStartPomodorosToggled = e.detail)} hideLabel label="Pomodoro start time" small={false} />
-    </ToggleWrapper>
+  <div class="flex flex-row justify-between pb-4">
+    <p class="font-semibold">Auto Start pomodoros?</p>
+    <SwitchWrapper>
+      <Switch 
+        on:change={handlePomodoroSwitch} 
+        checked={autoStartPomodoros}
+        handleDiameter={20}
+        onColor={"#243ed1"}
+        height={24}
+        width={48}
+      />
+    </SwitchWrapper>
+  </div>
+  <div class="flex flex-row justify-between pb-4">
+    <p class="font-semibold">Auto Start breaks?</p>
+    <SwitchWrapper>
+      <Switch 
+        on:change={handleBreakSwitch} 
+        checked={autoStartBreaks}
+        handleDiameter={20}
+        onColor={"#243ed1"}
+        height={24}
+        width={48}
+      />
+    </SwitchWrapper>
   </div>
 </ModalTemplate>

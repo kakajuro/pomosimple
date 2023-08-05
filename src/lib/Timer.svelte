@@ -25,7 +25,7 @@
   let skipButtonActive = false;
   let whichTimer;
   
-  $: whichTimer = $pomodoroMode ? $SETTINGSpomodoroTime : $SETTINGSbreakTime;
+  $: whichTimer = $pomodoroMode ? ($SETTINGSpomodoroTime*60) : ($SETTINGSbreakTime*60);
 
   $: displayMinutes = Math.floor(whichTimer / 60);
   $: actualSeconds = whichTimer - (displayMinutes * 60)

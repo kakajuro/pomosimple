@@ -67,8 +67,6 @@
       <p class="text-lg font-bold">{$pomodoroMode ? "Time to focus!" : "Take a break!"}</p>
 
       <h2 class="pt-10 font-bold text-xl">Stats</h2>
-      
-      <!-- Fill stats here -->
 
     </div>
 

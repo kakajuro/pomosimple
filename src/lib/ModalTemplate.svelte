@@ -24,7 +24,7 @@
       }
     }}
   >
-    <div class="bg-white w-[20%] p-[1rem] mt-[5%] rounded-md"
+    <div class="bg-white min-w-[350px] md:w-[420px] p-[1rem] mt-24 rounded-md"
       on:mouseenter={() => hoveringOnModal = true}
       on:mouseleave={() => hoveringOnModal = false}
     >
