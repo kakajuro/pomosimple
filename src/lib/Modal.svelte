@@ -1,7 +1,10 @@
 <script>
+  import { onMount } from "svelte";
   import ModalTemplate from "./ModalTemplate.svelte";
   import SwitchWrapper from "./SwitchWrapper.svelte";
   import Switch from "svelte-switch";
+
+  let checkSettings = false;
 
   import {
     SETTINGSpomodoroTime,
@@ -9,6 +12,20 @@
     SETTINGSautoStartPomodoro,
     SETTINGSautoStartBreak,
   } from "../stores/settingsStores"
+
+  $: {
+    const SETTINGS = {
+      pomodoroTime: $SETTINGSpomodoroTime,
+      breakTime: $SETTINGSbreakTime,
+      autoStartPomodoro: $SETTINGSautoStartPomodoro,
+      autoStartBreak: $SETTINGSautoStartBreak
+    }
+
+    if (checkSettings) {
+      // Save settings to local storage here
+    }
+
+  }
 
   function handlePomodoroSwitch(e) {
     const { checked } = e.detail;
@@ -19,6 +36,8 @@
     const { checked } = e.detail;
     $SETTINGSautoStartBreak = checked;
   }
+
+  onMount(() => checkSettings = true);
    
 </script>
 
