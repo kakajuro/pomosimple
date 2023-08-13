@@ -4,7 +4,10 @@
   import SwitchWrapper from "./SwitchWrapper.svelte";
   import Switch from "svelte-switch";
 
+  import { ls } from "../stores/mainStores";
+
   let checkSettings = false;
+  let settings;
 
   import {
     SETTINGSpomodoroTime,
@@ -14,7 +17,7 @@
   } from "../stores/settingsStores"
 
   $: {
-    const SETTINGS = {
+    settings = {
       pomodoroTime: $SETTINGSpomodoroTime,
       breakTime: $SETTINGSbreakTime,
       autoStartPomodoro: $SETTINGSautoStartPomodoro,
@@ -22,7 +25,9 @@
     }
 
     if (checkSettings) {
-      // Save settings to local storage here
+      $ls.set('settings', { settings });
+      console.log(settings);
+      console.log($ls.get('settings'));
     }
 
   }

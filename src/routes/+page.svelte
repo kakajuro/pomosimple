@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import { fade, fly, scale } from "svelte/transition"
+  import SecureLS from "secure-ls"
 
   import Icon from "svelte-icons-pack/Icon.svelte"
   import IoSettingsOutline from "svelte-icons-pack/io/IoSettingsOutline"
@@ -9,20 +10,54 @@
   import Timer from "$lib/Timer.svelte";
   import Modal from "../lib/Modal.svelte";
 
+  export let data;
+
   import { 
     displaySecondsStore, 
     displayMinutesStore, 
     pomodoroMode, 
     pomodoroCount,
-    modalOpen } from "../stores/mainStores";
+    modalOpen,
+    ls } from "../stores/mainStores";
 
+  import {
+    SETTINGS,
+    SETTINGSpomodoroTime,
+    SETTINGSbreakTime,
+    SETTINGSautoStartPomodoro,
+    SETTINGSautoStartBreak,
+  } from "../stores/settingsStores"
+	
   let hoveringOnSettings = false;
   let hoveringOnRepo = false;
 
   let repoLink = "https://github.com/swishyy/pomosimple";
 
   let ready = false;
-  onMount(() => ready = true);
+
+  onMount(() => {
+
+    $ls = new SecureLS({
+      encodingType: "aes",
+      encryptionKey: data.data
+    });
+
+     if ($ls.get('settings') === "") {
+      $ls.set('settings', {
+        pomodoroTime: $SETTINGSpomodoroTime,
+        breakTime: $SETTINGSbreakTime,
+        autoStartPomodoro: $SETTINGSautoStartPomodoro,
+        autoStartBreak: $SETTINGSautoStartBreak
+      });
+     } else {
+      $SETTINGS = $ls.get('settings');
+     }
+
+    //console.log($ls.get('settings'));
+    //console.log($SETTINGS);
+
+    ready = true;
+  });
 
 </script> 
 
