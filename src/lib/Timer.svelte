@@ -10,7 +10,8 @@
             displaySecondsStore, 
             halfCycle,
             pomodoroMode,
-            pomodoroCount } from "../stores/mainStores"
+            pomodoroCount, 
+			ls} from "../stores/mainStores"
 
   import {
     SETTINGSpomodoroTime,
@@ -21,10 +22,13 @@
     STATSglobalreps,
     STATStotalTime
   } from "../stores/statsStores";
+	import { onMount } from "svelte";
 
+
+  let settings;
   let skipButtonActive = false;
   let whichTimer;
-  
+
   $: whichTimer = $pomodoroMode ? ($SETTINGSpomodoroTime*60) : ($SETTINGSbreakTime*60);
 
   $: displayMinutes = Math.floor(whichTimer / 60);
@@ -74,6 +78,10 @@
     changePomodoroMode(!$pomodoroMode);
     $timerActive = false;
   }
+
+  onMount(() => {
+    settings = $ls.get("settings").settings;
+  });
 
 </script>
 

@@ -10,6 +10,7 @@
   let settings;
 
   import {
+    SETTINGS,
     SETTINGSpomodoroTime,
     SETTINGSbreakTime,
     SETTINGSautoStartPomodoro,
@@ -25,9 +26,13 @@
     }
 
     if (checkSettings) {
-      $ls.set('settings', { settings });
-      console.log(settings);
-      console.log($ls.get('settings'));
+
+      if ($ls.get("settings") === "") {
+        ;
+      } else {
+        //console.log($ls.get("settings").settings);
+      }
+
     }
 
   }
@@ -42,7 +47,11 @@
     $SETTINGSautoStartBreak = checked;
   }
 
-  onMount(() => checkSettings = true);
+  onMount(() => {
+    checkSettings = true;
+
+
+  });
    
 </script>
 

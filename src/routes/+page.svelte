@@ -42,19 +42,18 @@
       encryptionKey: data.data
     });
 
-     if ($ls.get('settings') === "") {
+     if ($ls.get('settings') != "") {
+      console.log($ls.get('settings'));
+     } else {
+      console.log("New settings obj");
+
       $ls.set('settings', {
         pomodoroTime: $SETTINGSpomodoroTime,
         breakTime: $SETTINGSbreakTime,
         autoStartPomodoro: $SETTINGSautoStartPomodoro,
         autoStartBreak: $SETTINGSautoStartBreak
       });
-     } else {
-      $SETTINGS = $ls.get('settings');
      }
-
-    //console.log($ls.get('settings'));
-    //console.log($SETTINGS);
 
     ready = true;
   });
