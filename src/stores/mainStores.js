@@ -15,6 +15,3 @@ export const pomodoroCount = writable(0);
 
 // Modal store
 export const modalOpen = writable(false);
-
-//SecureStorageObjectStore
-export const ls = writable();

@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte"
   import { fade, fly, scale } from "svelte/transition"
-  import SecureLS from "secure-ls"
 
   import Icon from "svelte-icons-pack/Icon.svelte"
   import IoSettingsOutline from "svelte-icons-pack/io/IoSettingsOutline"
@@ -17,8 +16,7 @@
     displayMinutesStore, 
     pomodoroMode, 
     pomodoroCount,
-    modalOpen,
-    ls } from "../stores/mainStores";
+    modalOpen } from "../stores/mainStores";
 
   import {
     SETTINGS,
@@ -37,23 +35,23 @@
 
   onMount(() => {
 
-    $ls = new SecureLS({
-      encodingType: "aes",
-      encryptionKey: data.data
-    });
+    // $ls = new SecureLS({
+    //   encodingType: "aes",
+    //   encryptionKey: data.data
+    // });
 
-     if ($ls.get('settings') != "") {
-      console.log($ls.get('settings'));
-     } else {
-      console.log("New settings obj");
+    //  if ($ls.get('settings') != "") {
+    //   console.log($ls.get('settings'));
+    //  } else {
+    //   console.log("New settings obj");
 
-      $ls.set('settings', {
-        pomodoroTime: $SETTINGSpomodoroTime,
-        breakTime: $SETTINGSbreakTime,
-        autoStartPomodoro: $SETTINGSautoStartPomodoro,
-        autoStartBreak: $SETTINGSautoStartBreak
-      });
-     }
+    //   $ls.set('settings', {
+    //     pomodoroTime: $SETTINGSpomodoroTime,
+    //     breakTime: $SETTINGSbreakTime,
+    //     autoStartPomodoro: $SETTINGSautoStartPomodoro,
+    //     autoStartBreak: $SETTINGSautoStartBreak
+    //   });
+    //  }
 
     ready = true;
   });

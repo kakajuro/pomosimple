@@ -4,10 +4,13 @@
   import SwitchWrapper from "./SwitchWrapper.svelte";
   import Switch from "svelte-switch";
 
-  import { ls } from "../stores/mainStores";
-
   let checkSettings = false;
   let settings;
+
+  let newPomodoroTime;
+  let newSettingsBreakTime;
+  let newSettingsAutoStartPomodoro;
+  let newSettingsAutoStartBreak;
 
   import {
     SETTINGS,
@@ -21,19 +24,11 @@
     settings = {
       pomodoroTime: $SETTINGSpomodoroTime,
       breakTime: $SETTINGSbreakTime,
-      autoStartPomodoro: $SETTINGSautoStartPomodoro,
-      autoStartBreak: $SETTINGSautoStartBreak
+      autoStartPomodoro: newSettingsAutoStartPomodoro,
+      autoStartBreak: newSettingsAutoStartBreak
     }
 
-    if (checkSettings) {
-
-      if ($ls.get("settings") === "") {
-        ;
-      } else {
-        //console.log($ls.get("settings").settings);
-      }
-
-    }
+    checkSettings ? $SETTINGS = settings : null
 
   }
 
