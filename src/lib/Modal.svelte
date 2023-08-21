@@ -4,13 +4,7 @@
   import SwitchWrapper from "./SwitchWrapper.svelte";
   import Switch from "svelte-switch";
 
-  let checkSettings = false;
   let settings;
-
-  let newPomodoroTime;
-  let newSettingsBreakTime;
-  let newSettingsAutoStartPomodoro;
-  let newSettingsAutoStartBreak;
 
   import {
     SETTINGS,
@@ -20,32 +14,51 @@
     SETTINGSautoStartBreak,
   } from "../stores/settingsStores"
 
-  $: {
-    settings = {
-      pomodoroTime: $SETTINGSpomodoroTime,
-      breakTime: $SETTINGSbreakTime,
-      autoStartPomodoro: newSettingsAutoStartPomodoro,
-      autoStartBreak: newSettingsAutoStartBreak
-    }
+  function handlePomodoroTime(e) { 
+    $SETTINGSpomodoroTime = e.target.value;
 
-    checkSettings ? $SETTINGS = settings : null
+    writeToSettings();
+  }
 
+  function handleBreakTime(e) {
+    $SETTINGSbreakTime = e.target.value;
+
+    writeToSettings();
   }
 
   function handlePomodoroSwitch(e) {
     const { checked } = e.detail;
     $SETTINGSautoStartPomodoro = checked;
+
+    writeToSettings();
   }
 
   function handleBreakSwitch(e) {
     const { checked } = e.detail;
     $SETTINGSautoStartBreak = checked;
+
+    writeToSettings();
+  }
+
+  function writeToSettings() {
+    settings = {
+      pomodoroTime: $SETTINGSpomodoroTime,
+      breakTime: $SETTINGSbreakTime,
+      autoStartPomodoro: $SETTINGSautoStartPomodoro,
+      autoStartBreak: $SETTINGSautoStartBreak
+    }
+
+    $SETTINGS = settings;
   }
 
   onMount(() => {
+
+    $SETTINGSpomodoroTime = parseInt($SETTINGS.pomodoroTime)
+    $SETTINGSbreakTime = parseInt($SETTINGS.breakTime)
+    $SETTINGSautoStartPomodoro = $SETTINGS.autoStartPomodoro
+    $SETTINGSautoStartBreak = $SETTINGS.autoStartBreak
+
     checkSettings = true;
-
-
   });
    
 </script>
@@ -57,11 +70,11 @@
     <h1 class="pb-2 font-bold underline">Timer (minutes)</h1>
     <div class="flex flex-row justify-between pb-3">
       <p class="font-semibold">Pomodoro length</p>
-      <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} bind:value={$SETTINGSpomodoroTime} />
+      <input class="bg-slate-200 border rounded-md w-16 mr-10" type="number" min={1} on:input={e => handlePomodoroTime(e)} bind:value={$SETTINGSpomodoroTime} />
     </div>
     <div class="flex flex-row justify-between pb-4">
       <p class="font-semibold">Break length</p>
-      <input class="bg-slate-200 border rounded-md w-16 mr-10 p-" type="number" min={1} bind:value={$SETTINGSbreakTime} />
+      <input class="bg-slate-200 border rounded-md w-16 mr-10 p-" type="number" min={1} on:input={e => handleBreakTime(e)} bind:value={$SETTINGSbreakTime} />
     </div> 
   </div>
   <div class="flex flex-row justify-between pb-4">

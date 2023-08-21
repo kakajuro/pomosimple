@@ -18,41 +18,15 @@
     pomodoroCount,
     modalOpen } from "../stores/mainStores";
 
-  import {
-    SETTINGS,
-    SETTINGSpomodoroTime,
-    SETTINGSbreakTime,
-    SETTINGSautoStartPomodoro,
-    SETTINGSautoStartBreak,
-  } from "../stores/settingsStores"
-	
+  let settings;
+
   let hoveringOnSettings = false;
   let hoveringOnRepo = false;
-
   let repoLink = "https://github.com/swishyy/pomosimple";
 
   let ready = false;
 
   onMount(() => {
-
-    // $ls = new SecureLS({
-    //   encodingType: "aes",
-    //   encryptionKey: data.data
-    // });
-
-    //  if ($ls.get('settings') != "") {
-    //   console.log($ls.get('settings'));
-    //  } else {
-    //   console.log("New settings obj");
-
-    //   $ls.set('settings', {
-    //     pomodoroTime: $SETTINGSpomodoroTime,
-    //     breakTime: $SETTINGSbreakTime,
-    //     autoStartPomodoro: $SETTINGSautoStartPomodoro,
-    //     autoStartBreak: $SETTINGSautoStartBreak
-    //   });
-    //  }
-
     ready = true;
   });
 

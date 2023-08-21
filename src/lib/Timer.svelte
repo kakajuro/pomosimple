@@ -14,11 +14,6 @@
 
   import { SETTINGS } from "../stores/settingsStores";
 
-  import {
-    STATSglobalreps,
-    STATStotalTime
-  } from "../stores/statsStores";
-
 	import { onMount } from "svelte";
 
   let skipButtonActive = false;
