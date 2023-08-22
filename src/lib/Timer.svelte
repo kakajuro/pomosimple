@@ -69,10 +69,6 @@
     $timerActive = false;
   }
 
-  onMount(() => {
-    // settings = $ls.get("settings").settings;
-  });
-
 </script>
 
 <div class="

@@ -58,7 +58,6 @@
     $SETTINGSautoStartPomodoro = $SETTINGS.autoStartPomodoro
     $SETTINGSautoStartBreak = $SETTINGS.autoStartBreak
 
-    checkSettings = true;
   });
    
 </script>
