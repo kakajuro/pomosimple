@@ -14,8 +14,6 @@
 
   import { SETTINGS } from "../stores/settingsStores";
 
-	import { onMount } from "svelte";
-
   let skipButtonActive = false;
   let whichTimer;
 
@@ -46,7 +44,11 @@
     changePomodoroMode(!$pomodoroMode);
     $timerActive = false;
     
-    // Check if autoStart breaks is here
+    if ($pomodoroMode && $SETTINGS.autoStartPomodoro) {
+      $timerActive = true;
+    } else if (!$pomodoroMode && $SETTINGS.autoStartBreak) {
+      $timerActive = true;
+    }
   }
 
   setInterval(() => {
