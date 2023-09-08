@@ -9,8 +9,6 @@
   import Timer from "$lib/Timer.svelte";
   import Modal from "../lib/Modal.svelte";
 
-  export let data;
-
   import { 
     displaySecondsStore, 
     displayMinutesStore, 

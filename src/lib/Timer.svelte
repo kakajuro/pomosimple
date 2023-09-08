@@ -14,6 +14,9 @@
 
   import { SETTINGS } from "../stores/settingsStores";
 
+  let timerStartAudio;
+  let timerEndAudio;
+
   let skipButtonActive = false;
   let whichTimer;
 
@@ -33,12 +36,12 @@
 
     if ($pomodoroMode) {
       $halfCycle = true;
-      whichTimer = $SETTINGS.breakTime;
+      whichTimer = ($SETTINGS.breakTime*60);
     } else if (!$pomodoroMode && $halfCycle) {
       $pomodoroCount += 1
-      whichTimer = $SETTINGS.pomodoroTime;
+      whichTimer = ($SETTINGS.pomodoroTime*60);
     } else {
-      whichTimer = $SETTINGS.pomodoroTime;
+      whichTimer = ($SETTINGS.pomodoroTime*60);
     } 
 
     changePomodoroMode(!$pomodoroMode);
@@ -106,4 +109,6 @@
       </button>
     {/if}
   </div>
+
+  <audio src="./audio/endtimer.mp3" bind:this={timerEndAudio} />
 </div>
