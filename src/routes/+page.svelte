@@ -72,7 +72,7 @@
       <p>Pomodoro cycles this session: <span class="font-bold">{$pomodoroCount}</span></p>
       <p class="text-lg font-bold">{$pomodoroMode ? "Time to focus!" : "Take a break!"}</p>
 
-      <h3 class="pt-10 font-bold text-xl">Stats coming soon...</h2>
+      <h3 class="pt-10 font-bold text-xl">Stats coming soon...</h3>
 
     </div>
 
