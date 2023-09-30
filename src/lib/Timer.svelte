@@ -34,6 +34,10 @@
 
   $: if (whichTimer == 0) {
 
+    timerEndAudio.volume = 0.7;
+    timerEndAudio.playbackRate = 1.3;
+    timerEndAudio.play();
+
     if ($pomodoroMode) {
       $halfCycle = true;
       whichTimer = ($SETTINGS.breakTime*60);
